@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="images/flavicon.png">
+        <title>Happyfy</title>   
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </head>
+    <body>
+
+        <section class="animate__animated animate__backInRight">
+            <div>
+                <i class="material-icons">close</i>
+                <span>
+                    <p id="text"></p>
+                    <cite id="author"></cite>
+                </span>
+            </div>
+        </section>
+
+        <script>
+            let randomQuote = () => {
+                fetch("https://type.fit/api/quotes")
+                .then((response) => {
+                    return response.json();
+                })
+                .then((result) => {
+                    let r = Math.ceil(Math.random() * 1600);
+                    // Text
+                    document.getElementById("text").innerText = `"${result[r].text}"` ;
+                    // Author
+                    document.getElementById("author").innerText = result[r].author;
+    
+                    // console.log(result[r].text, result[r].author)
+                    // console.log(r);
+                })
+            }
+            randomQuote();
+            setInterval(() => {
+                randomQuote();
+            }, 3000)
+        </script>
+    </body>
+</html>
